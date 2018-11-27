@@ -1,27 +1,27 @@
 class Node {
     constructor(x, y, size) {
-        this.nodex = x;
-        this.nodey = y;
-        this.node_size = size;
+        this.x = x;
+        this.y = y;
+        this.size = size;
         this.visited = false;
         this.walls = [true, true, true, true];
     }
 
     drawWalls () {
         if (this.walls[0]) {
-            this.drawTopWall(this.nodex, this.nodey, this.node_size);
+            this.drawTopWall(this.x, this.y, this.size);
         }
 
         if (this.walls[1]) {
-            this.drawRightWall(this.nodex, this.nodey, this.node_size);
+            this.drawRightWall(this.x, this.y, this.size);
         }
 
         if (this.walls[2]) {
-            this.drawBottomWall(this.nodex, this.nodey, this.node_size);
+            this.drawBottomWall(this.x, this.y, this.size);
         }
 
         if (this.walls[3]) {
-            this.drawLeftWall(this.nodex, this.nodey, this.node_size);
+            this.drawLeftWall(this.x, this.y, this.size);
         }
     }
 

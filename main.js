@@ -20,10 +20,10 @@ for (let x = 0; x <= columns; x++) {
     nodes[x] = new Array(rows);
     for (let y = 0; y <= rows; y++) {
         let node = new Node(x * nodesize, y * nodesize, nodesize);
-        nodes[x][y] = new Node(x * nodesize, y * nodesize, nodesize);
+        nodes[x][y] = node;
 
         //coordinate text
-        // ctx.fillText(`${node.nodex}, ${node.nodey}`, x * nodesize, y * nodesize + 100 / 10);
+        // ctx.fillText(`${node.x}, ${node.y}`, x * nodesize, y * nodesize + 100 / 10);
     }
 }
 
@@ -33,12 +33,12 @@ function getNeighbors (node) {
 
     for (let node of nodes) {
         for (let n of node) {
-            if (Math.abs(n.nodex - startNode.nodex) === nodesize && Math.abs(n.nodey - startNode.nodey) === nodesize) {
-            } else if (Math.abs(n.nodex - startNode.nodex) <= nodesize && Math.abs(n.nodey - startNode.nodey) <= nodesize) {
+            if (Math.abs(n.x - startNode.x) === nodesize && Math.abs(n.y - startNode.y) === nodesize) {
+            } else if (Math.abs(n.x - startNode.x) <= nodesize && Math.abs(n.y - startNode.y) <= nodesize) {
                 if (n.visited === false) {
                     neighbors.push(n);
 
-                    // console.log(`${n.nodex}, ${n.nodey} is neighbor of ${startNode.nodex}, ${startNode.nodey}`);
+                    // console.log(`${n.x}, ${n.y} is neighbor of ${startNode.x}, ${startNode.y}`);
                 }
 
             }
@@ -67,22 +67,22 @@ function chooseNeighbor (node) {
 function removeWalls(previous, next) {
     let node = previous;
 
-    if (next.nodex > node.nodex) {
+    if (next.x > node.x) {
         next.walls[3] = false;
         node.walls[1] = false;
     }
 
-    if (next.nodex < node.nodex) {
+    if (next.x < node.x) {
         next.walls[1] = false;
         node.walls[3] = false;
     }
 
-    if (next.nodey > node.nodey) {
+    if (next.y > node.y) {
         next.walls[0] = false;
         node.walls[2] = false;
     }
 
-    if (next.nodey < node.nodey) {
+    if (next.y < node.y) {
         next.walls[2] = false;
         node.walls[0] = false;
     }
@@ -96,7 +96,7 @@ function draw () {
     current.drawWalls();
     
     ctx.fillStyle = 'white';
-    ctx.fillRect(current.nodex, current.nodey, nodesize, nodesize);
+    ctx.fillRect(current.x, current.y, nodesize, nodesize);
     
     if (!stack.includes(current)) {
         stack.push(current);
@@ -106,13 +106,13 @@ function draw () {
     if (next) {
         removeWalls(current, next);
         ctx.fillStyle = 'white';
-        ctx.fillRect(current.nodex, current.nodey, nodesize, nodesize);
+        ctx.fillRect(current.x, current.y, nodesize, nodesize);
 
         current = next;
         current.visited = true;
 
         ctx.fillStyle = 'black';
-        ctx.fillRect(next.nodex, next.nodey, nodesize, nodesize); 
+        ctx.fillRect(next.x, next.y, nodesize, nodesize); 
     }
 
     if (!next) {
