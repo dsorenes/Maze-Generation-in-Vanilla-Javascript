@@ -27,38 +27,6 @@ for (let x = 0; x <= columns; x++) {
     }
 }
 
-function drawRightWall(sx, sy, size) {
-    ctx.beginPath();
-    ctx.moveTo(sx + size, sy);
-    ctx.lineTo(sx + size, sy + size);
-    ctx.closePath();
-    ctx.stroke();
-}
-
-function drawTopWall(sx, sy, size) {
-    ctx.beginPath();
-    ctx.moveTo(sx, sy);
-    ctx.lineTo(sx + size, sy);
-    ctx.closePath();
-    ctx.stroke();
-}
-
-function drawBottomWall(sx, sy, size) {
-    ctx.beginPath();
-    ctx.moveTo(sx + size, sy + size);
-    ctx.lineTo(sx, sy + size);
-    ctx.closePath();
-    ctx.stroke();
-}
-
-function drawLeftWall(sx, sy, size) {
-    ctx.beginPath();
-    ctx.moveTo(sx, sy + size);
-    ctx.lineTo(sx, sy);
-    ctx.closePath();
-    ctx.stroke();
-}
-
 function getNeighbors (node) {
     let neighbors = [];
     let startNode = node;
@@ -94,6 +62,8 @@ function chooseNeighbor (node) {
     return next;
 }
 
+
+
 function removeWalls(previous, next) {
     let node = previous;
 
@@ -118,6 +88,9 @@ function removeWalls(previous, next) {
     }
 
 }
+
+let current = nodes[0][0];
+current.visited = true;
 
 function draw () {
     current.drawWalls();
