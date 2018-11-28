@@ -4,7 +4,7 @@ const ctx = canvas.getContext('2d');
 const width = 600;
 const height = 600;
 
-const nodesize = 40;
+const nodesize = 30;
 const rows = width / nodesize;
 const columns = height / nodesize;
 
@@ -121,7 +121,6 @@ let current = nodes[0][0];
 current.visited = true;
 ctx.fillStyle = 'white';
 ctx.fillRect(0, 0, width, height);
-
 
 function generate () {
 
