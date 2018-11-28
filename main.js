@@ -115,18 +115,19 @@ function removeWalls(current, next) {
 
 }
 
-
+//initialise
 createGrid();
 let current = nodes[0][0];
 current.visited = true;
-ctx.fillStyle = 'black';
+ctx.fillStyle = 'white';
 ctx.fillRect(0, 0, width, height);
 
 
 function generate () {
+
     current.drawWalls();
     
-    ctx.fillStyle = 'white';
+    ctx.fillStyle = '#F8F8FF';
     ctx.fillRect(current.x, current.y, nodesize, nodesize);
     
     if (!stack.includes(current)) {
@@ -135,12 +136,15 @@ function generate () {
 
     }
 
+    //creates the outer maze walls
+    ctx.strokeRect(0, 0, width, height);
+
     let next = chooseNeighbor(current);
 
     if (next) {
 
         removeWalls(current, next);
-        ctx.fillStyle = 'white';
+        ctx.fillStyle = '#F8F8FF';
         ctx.fillRect(current.x, current.y, nodesize, nodesize);
 
         current = next;
@@ -157,15 +161,22 @@ function generate () {
         current = stack[stack.length - 1];
         next = chooseNeighbor(current);
 
-        ctx.fillStyle = 'lightgrey';
+        ctx.fillStyle = 'black';
         ctx.fillRect(current.x, current.y, nodesize, nodesize);
 
+        if (stack.length === 1) {
+
+            clearInterval(generation);
+
+            //creates the start and end of the maze
+            ctx.fillStyle = '#F8F8FF';
+            ctx.fillRect(nodes[rows - 1][columns - 1].x, nodes[rows - 1][columns - 1].y, nodesize, nodesize);
+            ctx.fillRect(nodes[0][0].x, nodes[0][0].y, nodesize, nodesize);
+
+        }
+
     }
-
-    ctx.strokeRect(0, 0, width, height);
-    ctx.fillStyle = 'white';
-    ctx.fillRect(nodes[rows - 1][columns - 1].x, nodes[rows - 1][columns - 1].y, nodesize, nodesize);
-
+    
 }
 
 let generation = setInterval(generate, 10);
