@@ -3,6 +3,13 @@ Minor bugs, bad visuals, not really sure if it's working as intended
 Major refactoring needed
 
 
-
 DEMO:
 https://dsorenes.github.io/
+
+
+TO-DO:
+* add time to completion
+* add proper user interface
+* add a maze solver
+* add more algorithms
+
